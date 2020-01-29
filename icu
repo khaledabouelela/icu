@@ -1,0 +1,157 @@
+#include <WiFiEsp.h>
+#include <WiFiEspClient.h>
+#include <WiFiEspServer.h>
+#include <WiFiEspUdp.h>
+
+#include <Firebase.h>
+#include <FirebaseArduino.h>
+#include <FirebaseCloudMessaging.h>
+#include <FirebaseError.h>
+#include <FirebaseHttpClient.h>
+#include <FirebaseObject.h>
+
+#include <ESP8266.h>
+
+#include <ArduinoJson.h>
+
+#include <SoftwareSerial.h>
+SoftwareSerial espSerial= SoftwareSerial(2.3);
+#define FIREBASE_HOST "project2-bb150.firebaseio.com"
+#define FIREBASE_AUTH "2rW9ftJ1TfAWGUl17z3rUdZ51ILCiaLo4GkYpcy9"
+
+const char *ssid =  "khaled";   
+const char *password =  "111222333";
+
+int inputpin1 =A0;
+int inputpin2 =A1;
+int inputpin3 =A2;
+int inputpin4 =A3;
+int inputpin5 =A4;
+int inputpin6 =A5;
+
+int bed1=0;
+int bed2=0;
+int bed3=0;
+int bed4=0;
+int bed5=0;
+int bed6=0;
+void setup () {
+
+pinMode(inputpin1, INPUT);
+pinMode(inputpin2, INPUT);
+pinMode(inputpin3, INPUT);
+pinMode(inputpin4, INPUT);
+pinMode(inputpin5, INPUT);
+pinMode(inputpin6, INPUT);
+ 
+ Serial.begin(9600);
+ espSerial.begin(9600);
+ Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+}
+
+Serial.println("");
+  Serial.println("WiFi connected.");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+
+
+ Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+   
+}
+void loop () {
+  
+bed6=digitalRead(inputpin1);
+bed5=digitalRead(inputpin2);
+bed1=digitalRead(inputpin3);
+bed2=digitalRead(inputpin4);
+bed3=digitalRead(inputpin5);
+bed4=digitalRead(inputpin6);
+Serial.println(bed1);
+Serial.println(bed2); 
+Serial.println(bed3); 
+Serial.println(bed4); 
+Serial.println(bed5); 
+Serial.println(bed6);          
+if (bed1 >0)
+{
+Serial.println("the bed number 1 is free");
+Firebase.setString("bed1", "free");
+delay(1000);
+}
+else 
+{
+Serial.println("the bed number 1 is busy");
+Firebase.setString("bed1", "busy");
+delay(1000);
+}
+
+if (bed2 >0)
+{
+Serial.println("the bed number 2 is free");
+Firebase.setString("bed2", "free");
+delay(1000);
+}
+else 
+{
+Serial.println("the bed number 2 is busy");
+Firebase.setString("bed2", "busy");
+delay(1000);
+}
+
+if (bed3 >0)
+{
+Serial.println("the bed number 3 is free");
+Firebase.setString("bed3", "free");
+delay(1000);
+}
+else 
+{
+Serial.println("the bed number 3 is busy");
+Firebase.setString("bed3", "busy");
+delay(1000);
+}
+
+if (bed4 >0)
+{
+Serial.println("the bed number 4 is free");
+Firebase.setString("bed4", "free");
+delay(1000);
+}
+else 
+{
+Serial.println("the bed number 4 is busy");
+Firebase.setString("bed4", "busy");
+delay(1000);
+}
+
+if (bed5 >0)
+{
+Serial.println("the bed number 5 is free");
+Firebase.setString("bed5", "free");
+delay(1000);
+}
+else 
+{
+Serial.println("the bed number 5 is busy");
+Firebase.setString("bed5", "busy");
+delay(1000);
+}
+
+if (bed6 >0)
+{
+Serial.println("the bed number 6 is free");
+Firebase.setString("bed6", "free");
+delay(1000);
+}
+else 
+{
+Serial.println("the bed number 6 is busy");
+Firebase.setString("bed6", "busy");
+delay(1000);
+}
+}
