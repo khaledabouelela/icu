@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
-#define SSID "samokhab" // router SSID
-#define PASS "FCI_sala7_56" // router password
+#define SSID "khaled" // router SSID
+#define PASS "01289582788" // router password
 #define IP "184.106.153.149" // thingspeak.com IP
 
 String GET = "GET /update?key=7Q4EN2ZRP7MU6YC9&field1="; // ThingSpeak channel write key
